@@ -1,0 +1,751 @@
+/* --------------------
+   Self-hosted Font
+-------------------- */
+@font-face {
+  font-family: "Kirang Haerang";
+  src: url("fonts/KirangHaerang-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --------------------
+   Reset
+-------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* --------------------
+   Variables
+-------------------- */
+:root {
+  --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Arial, sans-serif;
+  --font-accent: "Kirang Haerang", system-ui;
+
+  --navy: #0b1c2d;
+  --armygreen: #1F3015;
+  --blue2: #295B73;
+  --offwhite: #e8e3d9;
+  --offwhite2: #FFFBEA;
+  --lightgreen: #E9F0C2;
+}
+
+/* --------------------
+   Base
+-------------------- */
+body {
+  font-family: var(--font-body);
+  background-color: #000;
+}
+
+.accent-font {
+  font-family: var(--font-accent);
+  font-weight: 400;
+}
+
+/* --------------------
+   Hide Native Scrollbar
+-------------------- */
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* --------------------
+   Home (Sticky hero + scroll cover)
+-------------------- */
+.home-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.hero {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+
+.overlay-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  padding-top: 0.01rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+
+  height: 100vh;            
+  justify-content: flex-start; 
+  pointer-events: auto;
+}
+
+.hero-cover {
+  height: 100vh;
+  background-color: rgba(11, 28, 45, 0.9);
+  position: relative;
+  z-index: 3;
+}
+
+.home-extension {
+  background-color: rgba(11, 28, 45, 0.9);
+  position: relative;
+  z-index: 3;
+}
+
+.home-navy-content {
+  max-width: none;        
+  margin: 0;
+  text-align: center;
+}
+
+.home-video {
+  max-width: 900px;      
+  margin: 0 auto;        
+  display: flex;
+  justify-content: center;
+}
+.home-navy-title {
+  padding-top: 4rem;
+  padding-bottom: 1.2rem;
+  font-size: 3.2rem;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  color: var(--offwhite);
+  margin: 0 auto 2rem;  
+  text-align: center;    
+  max-width: none;      
+  white-space: nowrap;
+}
+
+.home-video {
+  display: flex;
+  justify-content: center;
+}
+
+.home-video-placeholder {
+  width: min(900px, 100%);
+  aspect-ratio: 16 / 9;
+  border: 1px solid rgba(232, 227, 217, 0.35);
+  background: rgba(0, 0, 0, 0.18);
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.home-video-placeholder iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+@media (max-width: 677px) {
+  .home-navy-title {
+    font-size: 2.6rem;
+    white-space: normal;
+  }
+}
+
+/* --------------------
+   Title + Nav
+-------------------- */
+.site-title {
+  font-size: 5.4rem;
+  letter-spacing: 0.05em;
+  color: var(--navy);
+  text-transform: lowercase;
+}
+
+.site-nav {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0.1rem 1rem;
+}
+
+.site-nav a {
+  font-size: 1.3rem;
+  letter-spacing: 0.12em;
+  color: var(--navy);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-nav a:hover {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.site-credit {
+  position: absolute;
+  bottom: 1.5rem;
+
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  color: rgba(232, 227, 217, 0.6);
+
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* --------------------
+   Social Icons (SVG masks)
+-------------------- */
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 1.8rem;
+  margin-top: 1rem;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  background-color: var(--navy);
+  display: inline-block;
+
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+
+.icon:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+.icon-instagram {
+  -webkit-mask-image: url("logos/instagram.svg");
+  mask-image: url("logos/instagram.svg");
+}
+
+.icon-tiktok {
+  -webkit-mask-image: url("logos/tiktok.svg");
+  mask-image: url("logos/tiktok.svg");
+}
+
+.icon-youtube {
+  -webkit-mask-image: url("logos/youtube.svg");
+  mask-image: url("logos/youtube.svg");
+}
+
+.icon-spotify {
+  -webkit-mask-image: url("logos/spotify.svg");
+  mask-image: url("logos/spotify.svg");
+}
+
+.icon-applemusic {
+  -webkit-mask-image: url("logos/applemusic.svg");
+  mask-image: url("logos/applemusic.svg");
+}
+
+.icon-bandcamp {
+  -webkit-mask-image: url("logos/bandcamp.svg");
+  mask-image: url("logos/bandcamp.svg");
+}
+
+/* --------------------
+   Merch Page Helpers
+-------------------- */
+body.merch-body {
+  background-color: var(--navy);
+}
+
+.center-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.coming-soon {
+  font-family: var(--font-accent);
+  font-weight: 400;
+  font-size: 5rem;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  color: var(--offwhite);
+}
+
+/* --------------------
+   Responsive (Mobile)
+-------------------- */
+@media (max-width: 677px) {
+  .site-title {
+    font-size: 4.2rem;
+  }
+
+  .overlay-content {
+    padding-top: 2rem;
+  }
+
+  .site-nav {
+    gap: 1.2rem;
+  }
+
+  .site-nav a {
+    font-size: 1.25rem;
+    letter-spacing: 0.1em;
+  }
+
+  .socials {
+    gap: 1.2rem;
+  }
+
+  .icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .hero-image {
+    object-position: 7% 30%;
+  }
+
+  .coming-soon {
+    font-size: 3.2rem;
+  }
+}
+
+/* --------------------
+   Back link (default: light text on dark pages)
+-------------------- */
+.back-link {
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+  z-index: 3;
+
+  font-size: 2rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  color: var(--offwhite);
+
+  opacity: 0.85;
+}
+
+.back-link:hover {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+/* --------------------
+   Contact Page
+-------------------- */
+body.contact-body {
+  background-color: var(--armygreen);
+  color: var(--offwhite);
+  min-height: 100vh;
+}
+
+.contact-page {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 6rem 6vw 3rem;
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.contact-title {
+  color: var(--offwhite);
+  font-size: 3.2rem;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  white-space: nowrap;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 3rem;
+  align-items: start;
+  margin-top: 3rem;
+}
+
+.contact-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.contact-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.contact-label {
+  font-family: var(--font-accent);
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+}
+
+.contact-value {
+  font-weight: 400;
+  color: var(--offwhite);
+  text-decoration: none;
+  opacity: 0.9;
+}
+
+.contact-value:hover {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.contact-socials {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+
+body.contact-body .contact-socials .icon {
+  width: 18px;
+  height: 18px;
+  background-color: var(--offwhite);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.05rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  background: transparent;
+
+  border: 1px solid rgba(232, 227, 217, 0.28);
+  padding: 0.65rem 0.9rem;
+
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--offwhite);
+
+  outline: none;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: rgba(232, 227, 217, 0.6);
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: rgba(232, 227, 217, 0.7);
+}
+
+.contact-form textarea {
+  resize: vertical;
+}
+
+.contact-form textarea#eventDetails {
+  min-height: 140px;
+}
+
+.contact-form textarea#specialRequests {
+  min-height: unset;
+  height: 44px;
+  resize: vertical;
+}
+
+.contact-form button {
+  align-self: flex-end;
+  margin-top: 0.4rem;
+
+  background: none;
+  border: none;
+  padding: 0;
+
+  font-family: var(--font-accent);
+  font-size: 2rem;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  color: var(--offwhite);
+
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.contact-form button:hover {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.contact-thanks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+  min-height: 220px; /* ensures vertical centering even on small content */
+
+  font-family: var(--font-accent);
+  font-size: 2.4rem;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  text-align: center;
+
+  color: var(--offwhite);
+}
+
+@media (max-width: 677px) {
+  .contact-page {
+    padding-top: 7rem;
+  }
+
+  .contact-title {
+    white-space: normal;
+    font-size: 2.6rem;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .contact-form button {
+    align-self: flex-start;
+  }
+}
+
+/* --------------------
+   About Page
+-------------------- */
+body.about-body {
+  background-color: var(--offwhite2);
+  color: var(--navy);
+  min-height: 100vh;
+}
+body.about-body .scroll-thumb {
+  background: var(--navy);
+}
+
+.about-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 6rem 6vw 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.about-title {
+  font-size: 3.2rem;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  white-space: nowrap;
+  color: var(--navy);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  margin-bottom: 4rem;
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+  font-size: 1.3rem;
+  line-height: 1.65;
+
+  text-align: justify;
+  text-align-last: left;
+  color: var(--navy);
+}
+
+.about-image {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border: 1px solid rgba(11, 28, 45, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.about-full {
+  max-width: 900px;
+  margin: 0 auto 3.5rem;
+  text-align: center;
+}
+
+.about-subtitle {
+  font-size: 2.6rem;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  margin-bottom: 1.5rem;
+  color: var(--navy);
+}
+
+.about-full p {
+  font-size: 1.3rem;
+  
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+  
+
+  text-align: justify;
+  text-align-last: left;
+  color: var(--navy);
+}
+
+body.about-body .back-link {
+  color: var(--navy);
+  opacity: 0.85;
+}
+
+body.about-body .back-link:hover {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+@media (max-width: 677px) {
+  .about-page {
+    padding-top: 7rem;
+  }
+
+  .about-title {
+    white-space: normal;
+    font-size: 2.6rem;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .about-full {
+    text-align: left;
+  }
+}
+
+/* --------------------
+   Music Page
+-------------------- */
+
+body.music-body .scroll-thumb {
+  background: var(--offwhite);
+}
+
+body.music-body {
+  background-color: var(--blue2);
+  color: var(--offwhite);
+  min-height: 100vh;
+}
+
+/* --------------------
+   Custom Scrollbar
+-------------------- */
+.scroll-indicator {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.scroll-track {
+  width: 100%;
+  height: 100%;
+  background: rgba(120, 120, 120, 0.35);
+  position: relative;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.scroll-thumb {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 10px;
+  background: var(--navy);
+  border-radius: 0;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+@media (max-width: 677px) {
+  .scroll-indicator {
+    width: 3px;
+  }
+
+  .scroll-track {
+    background: rgba(120, 120, 120, 0.25);
+  }
+
+  .scroll-thumb {
+    height: 5px;
+  }
+}
