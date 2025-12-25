@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>merch • sunny pavel</title>
 
+    <!-- preload custom font -->
     <link
       rel="preload"
       href="fonts/KirangHaerang-Regular.woff2"
@@ -17,11 +18,22 @@
   </head>
 
   <body class="merch-body">
-    <!-- Back link -->
+    <!-- back button -->
     <a href="index.html" class="back-link accent-font">← back</a>
 
+    <!-- custom scrollbar -->
+    <div class="scroll-indicator" aria-hidden="true">
+      <div class="scroll-track">
+        <div class="scroll-thumb"></div>
+      </div>
+    </div>
+
+    <!-- page content -->
     <main class="center-screen">
-      <h1 class="coming-soon">coming soon!</h1>
+      <h1 class="coming-soon accent-font">coming soon!</h1>
     </main>
+
+    <!-- keep at bottom so DOM exists before script runs -->
+    <script src="script.js"></script>
   </body>
 </html>

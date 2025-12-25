@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>about • sunny pavel</title>
 
+    <!-- preload the font so headings don't flash -->
     <link
       rel="preload"
       href="fonts/KirangHaerang-Regular.woff2"
@@ -16,65 +17,67 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
 
-    <div class="scroll-indicator" aria-hidden="true">
-    <div class="scroll-track">
-        <div class="scroll-thumb"></div>
-    </div>
-    </div>
-
-    <script src="script.js"></script>
-
   <body class="about-body">
+    <!-- back to home -->
     <a href="index.html" class="back-link accent-font">← back</a>
+
+    <!-- custom scrollbar (same one as home) -->
+    <div class="scroll-indicator" aria-hidden="true">
+      <div class="scroll-track">
+        <div class="scroll-thumb"></div>
+      </div>
+    </div>
 
     <main class="about-page">
       <header class="about-header">
         <h1 class="about-title accent-font">hello, my name is sunny.</h1>
       </header>
 
-      <!-- INTRO GRID -->
+      <!-- top section: text + photo -->
       <section class="about-grid">
-        <!-- Left: intro text -->
         <div class="about-text">
           <p>
-            I was born and raised in Bolinas, a small coastal town in California, and that 
-            landscape helped shape my music. I strive to write evocative, meaningful originals 
-            that feel natural and relatable. As a primarily solo acoustic guitarist and vocalist, 
-            I love pairing meaningful lyrics with corresponding guitar work to create vivid imagery.
-
+            I was born and raised in Bolinas, a small coastal town in California,
+            and that landscape helped shape my music. I strive to write evocative,
+            meaningful originals that feel natural and relatable. As a primarily
+            solo acoustic guitarist and vocalist, I love pairing meaningful lyrics
+            with corresponding guitar work to create vivid imagery.
           </p>
 
           <p>
-            My style has been deeply shaped by artists such as John Mayer, Coldplay, James Taylor, 
-            and Dire Straits. When I perform, my goal is to create an intimate atmosphere through smooth 
-            vocals and detailed playing. In my sets, I blend a mix of my own original songs with unique, 
-            stripped-back arrangements of the classics we all know and love.
-
+            My style has been deeply shaped by artists such as John Mayer,
+            Coldplay, James Taylor, and Dire Straits. When I perform, my goal is
+            to create an intimate atmosphere through smooth vocals and detailed
+            playing. In my sets, I blend a mix of my own original songs with
+            unique, stripped-back arrangements of the classics we all know and
+            love.
           </p>
         </div>
 
-        <!-- Right: image -->
+        <!-- photo on the right -->
         <div class="about-image">
-            <img src="images/headshot.jpg" alt="sunny pavel headshot" />
+          <img src="images/headshot.jpg" alt="sunny pavel headshot" />
         </div>
       </section>
 
-      <!-- FULL-WIDTH SECTIONS -->
+      <!-- rest of the page is just stacked sections -->
       <section class="about-full">
         <h2 class="about-subtitle accent-font">MUSIC REPERTOIRE</h2>
 
         <p>
-            I’ve built a repertoire that is versatile and wide-ranging. I love the folk and singer-songwriter 
-            staples from James Taylor, Neil Young, and Fleetwood Mac, and lean into some modern favorites by John Mayer, 
-            Coldplay, Jack Johnson, and more. I also draw classics from the likes of Elton John, Van Morrison, Amy Winehouse, The Beatles.
-
+          I’ve built a repertoire that is versatile and wide-ranging. I love the
+          folk and singer-songwriter staples from James Taylor, Neil Young, and
+          Fleetwood Mac, and lean into some modern favorites by John Mayer,
+          Coldplay, Jack Johnson, and more. I also draw classics from the likes
+          of Elton John, Van Morrison, Amy Winehouse, The Beatles.
         </p>
 
         <p>
-            I aim to deliver a professional, engaging performance tailored to diverse audiences and event needs. I curate 
-            setlists to create an accessible and feel-good atmosphere. Utilizing the familiar classics, mixing in modern tunes, 
-            and including originals to keep the performance fresh. 
-
+          I aim to deliver a professional, engaging performance tailored to
+          diverse audiences and event needs. I curate setlists to create an
+          accessible and feel-good atmosphere. Utilizing the familiar classics,
+          mixing in modern tunes, and including originals to keep the
+          performance fresh.
         </p>
       </section>
 
@@ -82,12 +85,16 @@
         <h2 class="about-subtitle accent-font">SELF-SUFFICIENT SOUND</h2>
 
         <p>
-            To make things as easy as possible for venues and hosts, I am a fully self-contained act. I provide my own professional 
-            sound system (PA), including all microphones, stands, cables, and mixing equipment. This ensures a quick, seamless setup 
-            and high-quality, reliable sound for any space—from intimate lounges to outdoor events.
-
+          To make things as easy as possible for venues and hosts, I am a fully
+          self-contained act. I provide my own professional sound system (PA),
+          including all microphones, stands, cables, and mixing equipment. This
+          ensures a quick, seamless setup and high-quality, reliable sound for
+          any space—from intimate lounges to outdoor events.
         </p>
       </section>
     </main>
+
+    <!-- JS at the bottom so it doesn't run before elements exist -->
+    <script src="script.js"></script>
   </body>
 </html>

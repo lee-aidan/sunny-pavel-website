@@ -3,8 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>sunny pavel</title>
 
+    <!-- preload custom font so the title doesn't jump -->
     <link
       rel="preload"
       href="fonts/KirangHaerang-Regular.woff2"
@@ -18,53 +20,87 @@
 
   <body>
     <main class="fullscreen home-wrap">
-    <section class="hero" aria-hidden="true">
-        <img src="images/bg.jpg" alt="" class="fullscreen-image hero-image" />
-    </section>
+      <!-- background image section (sticky) -->
+      <section class="hero" aria-hidden="true">
+        <img
+          src="images/bg.jpg"
+          alt=""
+          class="fullscreen-image hero-image"
+        />
+      </section>
 
-    <div class="overlay-content">
+      <!-- stuff that sits on top of the hero -->
+      <div class="overlay-content">
         <h1 class="site-title accent-font">sunny pavel</h1>
 
         <nav class="site-nav" aria-label="Main navigation">
-        <a href="about.html">about</a>
-        <a href="music.html">music</a>
-        <a href="contact.html">contact</a>
+          <a href="about.html">about</a>
+          <a href="music.html">music</a>
+          <!-- <a href="merch.html">merch</a> -->
+          <a href="contact.html">contact</a>
         </nav>
 
+        <!-- social icons -->
         <div class="socials" aria-label="Social links">
-        <a class="icon icon-instagram" href="https://www.instagram.com/sunnypavelmusic?igsh=NTc4MTIwNjQ2YQ%3D%3D&utm_source=qr" aria-label="Instagram" target="_blank" rel="noopener"></a>
-        <a class="icon icon-tiktok" href="http://www.tiktok.com/@sunnypavelmusic" aria-label="TikTok" target="_blank" rel="noopener"></a>
-        <a class="icon icon-youtube" href="https://www.youtube.com/@SunnyPavelMusic" aria-label="YouTube" target="_blank" rel="noopener"></a>
-        <a class="icon icon-spotify" href="#" aria-label="Spotify"></a>
-        <a class="icon icon-applemusic" href="#" aria-label="Apple Music"></a>
-        <a class="icon icon-bandcamp" href="#" aria-label="Bandcamp"></a>
+          <a
+            class="icon icon-instagram"
+            href="https://www.instagram.com/sunnypavelmusic?igsh=NTc4MTIwNjQ2YQ%3D%3D&utm_source=qr"
+            aria-label="Instagram"
+            target="_blank"
+            rel="noopener"
+          ></a>
+
+          <a
+            class="icon icon-tiktok"
+            href="http://www.tiktok.com/@sunnypavelmusic"
+            aria-label="TikTok"
+            target="_blank"
+            rel="noopener"
+          ></a>
+
+          <a
+            class="icon icon-youtube"
+            href="https://www.youtube.com/@SunnyPavelMusic"
+            aria-label="YouTube"
+            target="_blank"
+            rel="noopener"
+          ></a>
+
+          <a class="icon icon-spotify" href="#" aria-label="Spotify"></a>
+          <a class="icon icon-applemusic" href="#" aria-label="Apple Music"></a>
+          <a class="icon icon-bandcamp" href="#" aria-label="Bandcamp"></a>
         </div>
-    </div>
+      </div>
 
-    <section class="hero-cover">
-    <div class="home-navy-content">
-        <h2 class="home-navy-title accent-font">a few songs to showcase my sound!</h2>
+      <!-- navy section that scrolls over the hero -->
+      <section class="hero-cover">
+        <div class="home-navy-content">
+          <h2 class="home-navy-title accent-font">
+            a few songs to showcase my sound!
+          </h2>
 
-        <div class="home-video">
-        <!-- placeholder (swap for iframe later) -->
-    <div class="home-video-placeholder">
-    <iframe
-        src="https://www.youtube.com/embed/B6aw87yWlFg?rel=0&modestbranding=1"
-        title="Sunny Pavel – Live Performance"
-        loading="lazy"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-    </iframe>
-    </div>
+          <div class="home-video">
+            <div class="home-video-placeholder">
+              <iframe
+                src="https://www.youtube.com/embed/B6aw87yWlFg?rel=0&modestbranding=1"
+                title="Sunny Pavel – Live Performance"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
         </div>
-    </div>
-      <p class="site-credit accent-font">built by aidan lee</p>
-    </section>
 
-    <section class="home-extension" aria-hidden="true"></section>
+        <!-- site credit -->
+        <p class="site-credit accent-font">built by aidan lee</p>
+      </section>
+
+      <!-- extra space so scrolling feels right -->
+      <section class="home-extension" aria-hidden="true"></section>
     </main>
 
-    <!-- Custom scrollbar -->
+    <!-- custom scrollbar (hides native one) -->
     <div class="scroll-indicator" aria-hidden="true">
       <div class="scroll-track">
         <div class="scroll-thumb"></div>

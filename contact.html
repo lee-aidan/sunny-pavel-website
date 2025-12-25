@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>contact • sunny pavel</title>
 
+    <!-- preload custom font -->
     <link
       rel="preload"
       href="fonts/KirangHaerang-Regular.woff2"
@@ -17,7 +18,7 @@
   </head>
 
   <body class="contact-body">
-    <!-- Back link -->
+    <!-- simple back nav -->
     <a href="index.html" class="back-link accent-font">← back</a>
 
     <main class="contact-page">
@@ -26,32 +27,58 @@
       </header>
 
       <section class="contact-grid">
-        <!-- Left: info -->
+        <!-- LEFT SIDE: contact info -->
         <div class="contact-left">
           <div class="contact-row">
             <span class="contact-label">email</span>
-            <a class="contact-value" href="mailto:sunnypavelmusic@gmail.com">
+            <a
+              class="contact-value"
+              href="mailto:sunnypavelmusic@gmail.com"
+            >
               sunnypavelmusic@gmail.com
             </a>
           </div>
 
           <div class="contact-row">
             <span class="contact-label">phone</span>
-            <a class="contact-value" href="tel:15107341855">(510) 734-1855</a>
+            <a class="contact-value" href="tel:15107341855">
+              (510) 734-1855
+            </a>
 
+            <!-- socials live under phone -->
             <div class="contact-socials" aria-label="Social links">
-            <a class="icon icon-instagram" href="https://www.instagram.com/sunnypavelmusic?igsh=NTc4MTIwNjQ2YQ%3D%3D&utm_source=qr" aria-label="Instagram" target="_blank" rel="noopener"></a>
-            <a class="icon icon-tiktok" href="http://www.tiktok.com/@sunnypavelmusic" aria-label="TikTok" target="_blank" rel="noopener"></a>
-            <a class="icon icon-youtube" href="https://www.youtube.com/@SunnyPavelMusic" aria-label="YouTube" target="_blank" rel="noopener"></a>
-            <a class="icon icon-spotify" href="#" aria-label="Spotify"></a>
-            <a class="icon icon-applemusic" href="#" aria-label="Apple Music"></a>
-            <a class="icon icon-bandcamp" href="#" aria-label="Bandcamp"></a>
+              <a
+                class="icon icon-instagram"
+                href="https://www.instagram.com/sunnypavelmusic?igsh=NTc4MTIwNjQ2YQ%3D%3D&utm_source=qr"
+                aria-label="Instagram"
+                target="_blank"
+                rel="noopener"
+              ></a>
+
+              <a
+                class="icon icon-tiktok"
+                href="http://www.tiktok.com/@sunnypavelmusic"
+                aria-label="TikTok"
+                target="_blank"
+                rel="noopener"
+              ></a>
+
+              <a
+                class="icon icon-youtube"
+                href="https://www.youtube.com/@SunnyPavelMusic"
+                aria-label="YouTube"
+                target="_blank"
+                rel="noopener"
+              ></a>
+
+              <a class="icon icon-spotify" href="#" aria-label="Spotify"></a>
+              <a class="icon icon-applemusic" href="#" aria-label="Apple Music"></a>
+              <a class="icon icon-bandcamp" href="#" aria-label="Bandcamp"></a>
             </div>
           </div>
         </div>
 
-
-        <!-- Right: form (will be replaced on submit) -->
+        <!-- RIGHT SIDE: contact form -->
         <div id="contact-right">
           <form
             class="contact-form"
@@ -74,7 +101,6 @@
               name="phone"
               id="phone"
               placeholder="phone number"
-              inputmode="numeric"
               autocomplete="tel"
               required
             />
@@ -84,7 +110,6 @@
               name="reply_to"
               id="email"
               placeholder="your email"
-              inputmode="email"
               autocomplete="email"
               required
             />
@@ -104,8 +129,8 @@
               rows="2"
             ></textarea>
 
-            <!-- Dynamic subject: "contact form submitted by {name}" -->
-            <input type="hidden" name="_subject" id="subject" value="" />
+            <!-- used by formspree for email subject -->
+            <input type="hidden" name="_subject" id="subject" />
 
             <button type="submit" id="sendBtn">send</button>
           </form>
@@ -114,65 +139,62 @@
     </main>
 
     <script>
-      // Elements
+      // basic refs
       const form = document.getElementById("contactForm");
-      const rightColumn = document.getElementById("contact-right");
+      const rightCol = document.getElementById("contact-right");
       const nameInput = document.getElementById("name");
       const phoneInput = document.getElementById("phone");
       const subjectInput = document.getElementById("subject");
       const sendBtn = document.getElementById("sendBtn");
 
-      // 1) Phone formatter: (xxx) xxx-xxxx
-    phoneInput.addEventListener("input", (e) => {
-    // Strip everything except digits
-    let digits = e.target.value.replace(/\D/g, "");
+      // format phone as (xxx) xxx-xxxx
+      // also handles +1 / autofill cases
+      phoneInput.addEventListener("input", (e) => {
+        let digits = e.target.value.replace(/\D/g, "");
 
-    // Handle country code (+1 or 1)
-    if (digits.length === 11 && digits.startsWith("1")) {
-        digits = digits.slice(1);
-    }
+        if (digits.length === 11 && digits.startsWith("1")) {
+          digits = digits.slice(1);
+        }
 
-    // Limit to 10 digits max
-    digits = digits.slice(0, 10);
+        digits = digits.slice(0, 10);
 
-    let out = "";
+        let formatted = "";
 
-    if (digits.length > 0) out = "(" + digits.slice(0, 3);
-    if (digits.length >= 4) out += ") " + digits.slice(3, 6);
-    if (digits.length >= 7) out += "-" + digits.slice(6, 10);
+        if (digits.length > 0) formatted = "(" + digits.slice(0, 3);
+        if (digits.length >= 4) formatted += ") " + digits.slice(3, 6);
+        if (digits.length >= 7) formatted += "-" + digits.slice(6);
 
-    e.target.value = out;
-    });
+        e.target.value = formatted;
+      });
 
-      // 2) Dynamic subject line
+      // update email subject based on name
       function updateSubject() {
-        const name = (nameInput.value || "").trim();
+        const name = nameInput.value.trim();
         subjectInput.value = name
           ? `contact form submitted by ${name}`
           : "contact form submitted by (no name)";
       }
+
       nameInput.addEventListener("input", updateSubject);
       updateSubject();
 
-      // 3) Submit to Formspree + replace right column with thank-you message
+      // submit via formspree and swap form for thank you
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
         sendBtn.disabled = true;
         sendBtn.style.opacity = "0.6";
 
-        const formData = new FormData(form);
-
         try {
           const res = await fetch(form.action, {
             method: "POST",
-            body: formData,
+            body: new FormData(form),
             headers: { Accept: "application/json" },
           });
 
-          if (!res.ok) throw new Error("Formspree error");
+          if (!res.ok) throw new Error("submit failed");
 
-          rightColumn.innerHTML = `
+          rightCol.innerHTML = `
             <p class="contact-thanks accent-font">
               thanks, i'll do my best to respond promptly!
             </p>

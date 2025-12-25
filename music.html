@@ -1,36 +1,39 @@
-<body class="music-body"></body>
-    <!doctype html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>merch • sunny pavel</title>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>music • sunny pavel</title>
 
-        <link
-        rel="preload"
-        href="fonts/KirangHaerang-Regular.woff2"
-        as="font"
-        type="font/woff2"
-        crossorigin
-        />
+    <!-- preload custom font -->
+    <link
+      rel="preload"
+      href="fonts/KirangHaerang-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
-        <link rel="stylesheet" href="styles.css" />
-    </head>
-    
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body class="music-body">
+    <!-- back button -->
+    <a href="index.html" class="back-link accent-font">← back</a>
+
+    <!-- custom scrollbar -->
     <div class="scroll-indicator" aria-hidden="true">
-    <div class="scroll-track">
+      <div class="scroll-track">
         <div class="scroll-thumb"></div>
-    </div>
+      </div>
     </div>
 
+    <!-- page content -->
+    <main class="center-screen">
+      <h1 class="coming-soon accent-font">coming soon!</h1>
+    </main>
+
+    <!-- js at the bottom so everything is loaded first -->
     <script src="script.js"></script>
-
-    <body class="merch-body">
-        <!-- Back link -->
-        <a href="index.html" class="back-link accent-font">← back</a>
-
-        <main class="center-screen">
-        <h1 class="coming-soon">coming soon!</h1>
-        </main>
-    </body>
-    </html>
+  </body>
+</html>

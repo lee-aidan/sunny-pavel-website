@@ -1,5 +1,5 @@
 /* --------------------
-   Self-hosted Font
+   font
 -------------------- */
 @font-face {
   font-family: "Kirang Haerang";
@@ -10,7 +10,7 @@
 }
 
 /* --------------------
-   Reset
+   reset
 -------------------- */
 *,
 *::before,
@@ -21,7 +21,7 @@
 }
 
 /* --------------------
-   Variables
+   variables (colors/fonts)
 -------------------- */
 :root {
   --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -29,15 +29,17 @@
   --font-accent: "Kirang Haerang", system-ui;
 
   --navy: #0b1c2d;
-  --armygreen: #1F3015;
-  --blue2: #295B73;
+  --armygreen: #1f3015;
+  --blue2: #295b73;
+  --offorange: #cf482d;
+
   --offwhite: #e8e3d9;
-  --offwhite2: #FFFBEA;
-  --lightgreen: #E9F0C2;
+  --offwhite2: #fffbeb;
+  --lightgreen: #e9f0c2;
 }
 
 /* --------------------
-   Base
+   base
 -------------------- */
 body {
   font-family: var(--font-body);
@@ -50,7 +52,7 @@ body {
 }
 
 /* --------------------
-   Hide Native Scrollbar
+   hide native scrollbar
 -------------------- */
 html {
   scrollbar-width: none;
@@ -64,120 +66,7 @@ body::-webkit-scrollbar {
 }
 
 /* --------------------
-   Home (Sticky hero + scroll cover)
--------------------- */
-.home-wrap {
-  position: relative;
-  width: 100%;
-}
-
-.hero {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.hero-image {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 30%;
-  z-index: 0;
-  pointer-events: none;
-}
-
-
-.overlay-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  width: 100%;
-  padding-top: 0.01rem;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.2rem;
-
-  height: 100vh;            
-  justify-content: flex-start; 
-  pointer-events: auto;
-}
-
-.hero-cover {
-  height: 100vh;
-  background-color: rgba(11, 28, 45, 0.9);
-  position: relative;
-  z-index: 3;
-}
-
-.home-extension {
-  background-color: rgba(11, 28, 45, 0.9);
-  position: relative;
-  z-index: 3;
-}
-
-.home-navy-content {
-  max-width: none;        
-  margin: 0;
-  text-align: center;
-}
-
-.home-video {
-  max-width: 900px;      
-  margin: 0 auto;        
-  display: flex;
-  justify-content: center;
-}
-.home-navy-title {
-  padding-top: 4rem;
-  padding-bottom: 1.2rem;
-  font-size: 3.2rem;
-  letter-spacing: 0.05em;
-  text-transform: lowercase;
-  color: var(--offwhite);
-  margin: 0 auto 2rem;  
-  text-align: center;    
-  max-width: none;      
-  white-space: nowrap;
-}
-
-.home-video {
-  display: flex;
-  justify-content: center;
-}
-
-.home-video-placeholder {
-  width: min(900px, 100%);
-  aspect-ratio: 16 / 9;
-  border: 1px solid rgba(232, 227, 217, 0.35);
-  background: rgba(0, 0, 0, 0.18);
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-.home-video-placeholder iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  display: block;
-}
-
-@media (max-width: 677px) {
-  .home-navy-title {
-    font-size: 2.6rem;
-    white-space: normal;
-  }
-}
-
-/* --------------------
-   Title + Nav
+   shared nav + title 
 -------------------- */
 .site-title {
   font-size: 5.4rem;
@@ -207,10 +96,10 @@ body::-webkit-scrollbar {
   text-underline-offset: 6px;
 }
 
+/* credit at bottom of home */
 .site-credit {
   position: absolute;
   bottom: 1.5rem;
-
   left: 50%;
   transform: translateX(-50%);
 
@@ -224,7 +113,8 @@ body::-webkit-scrollbar {
 }
 
 /* --------------------
-   Social Icons (SVG masks)
+   shared socials (svg masks)
+   ** these are <a> tags with masks, not <img>
 -------------------- */
 .socials {
   display: flex;
@@ -259,98 +149,29 @@ body::-webkit-scrollbar {
   -webkit-mask-image: url("logos/instagram.svg");
   mask-image: url("logos/instagram.svg");
 }
-
 .icon-tiktok {
   -webkit-mask-image: url("logos/tiktok.svg");
   mask-image: url("logos/tiktok.svg");
 }
-
 .icon-youtube {
   -webkit-mask-image: url("logos/youtube.svg");
   mask-image: url("logos/youtube.svg");
 }
-
 .icon-spotify {
   -webkit-mask-image: url("logos/spotify.svg");
   mask-image: url("logos/spotify.svg");
 }
-
 .icon-applemusic {
   -webkit-mask-image: url("logos/applemusic.svg");
   mask-image: url("logos/applemusic.svg");
 }
-
 .icon-bandcamp {
   -webkit-mask-image: url("logos/bandcamp.svg");
   mask-image: url("logos/bandcamp.svg");
 }
 
 /* --------------------
-   Merch Page Helpers
--------------------- */
-body.merch-body {
-  background-color: var(--navy);
-}
-
-.center-screen {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 2rem;
-}
-
-.coming-soon {
-  font-family: var(--font-accent);
-  font-weight: 400;
-  font-size: 5rem;
-  letter-spacing: 0.08em;
-  text-transform: lowercase;
-  color: var(--offwhite);
-}
-
-/* --------------------
-   Responsive (Mobile)
--------------------- */
-@media (max-width: 677px) {
-  .site-title {
-    font-size: 4.2rem;
-  }
-
-  .overlay-content {
-    padding-top: 2rem;
-  }
-
-  .site-nav {
-    gap: 1.2rem;
-  }
-
-  .site-nav a {
-    font-size: 1.25rem;
-    letter-spacing: 0.1em;
-  }
-
-  .socials {
-    gap: 1.2rem;
-  }
-
-  .icon {
-    width: 18px;
-    height: 18px;
-  }
-
-  .hero-image {
-    object-position: 7% 30%;
-  }
-
-  .coming-soon {
-    font-size: 3.2rem;
-  }
-}
-
-/* --------------------
-   Back link (default: light text on dark pages)
+   shared back link
 -------------------- */
 .back-link {
   position: fixed;
@@ -373,7 +194,383 @@ body.merch-body {
 }
 
 /* --------------------
-   Contact Page
+   custom scrollbar (global)
+   ** js handles sizing + position
+-------------------- */
+.scroll-indicator {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.scroll-track {
+  width: 100%;
+  height: 100%;
+  background: rgba(120, 120, 120, 0.35);
+  position: relative;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.scroll-thumb {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 10px;
+  background: var(--navy);
+  border-radius: 0;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* --------------------
+   shared responsive stuff
+-------------------- */
+@media (max-width: 677px) {
+  .site-title {
+    font-size: 4.2rem;
+  }
+
+  .site-nav {
+    gap: 1.2rem;
+  }
+
+  .site-nav a {
+    font-size: 1.25rem;
+    letter-spacing: 0.1em;
+  }
+
+  .socials {
+    gap: 1.2rem;
+  }
+
+  .icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* mobile scrollbar should be super thin */
+  .scroll-indicator {
+    width: 3px;
+  }
+
+  .scroll-track {
+    background: rgba(120, 120, 120, 0.25);
+  }
+
+  .scroll-thumb {
+    height: 5px;
+  }
+}
+
+/* ============================================================
+   pages start here
+   ============================================================ */
+
+/* --------------------
+   home
+-------------------- */
+.home-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.hero {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* the home overlay (title/nav/icons) */
+.overlay-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  padding-top: 0.01rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+
+  height: 100vh;
+  justify-content: flex-start;
+  pointer-events: auto;
+}
+
+.hero-cover {
+  height: 100vh;
+  background-color: rgba(11, 28, 45, 0.9);
+  position: relative;
+  z-index: 3;
+}
+
+.home-extension {
+  background-color: rgba(11, 28, 45, 0.9);
+  position: relative;
+  z-index: 3;
+}
+
+.home-navy-content {
+  max-width: none;
+  margin: 0;
+  text-align: center;
+}
+
+.home-video {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.home-navy-title {
+  padding-top: 4rem;
+  padding-bottom: 1.2rem;
+
+  font-size: 3.2rem;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  color: var(--offwhite);
+
+  margin: 0 auto 2rem;
+  text-align: center;
+  max-width: none;
+  white-space: nowrap;
+}
+
+.home-video-placeholder {
+  width: min(900px, 100%);
+  aspect-ratio: 16 / 9;
+
+  border: 1px solid rgba(232, 227, 217, 0.35);
+  background: rgba(0, 0, 0, 0.18);
+
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.home-video-placeholder iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+@media (max-width: 677px) {
+  .overlay-content {
+    padding-top: 2rem;
+  }
+
+  .hero-image {
+    object-position: 7% 30%;
+  }
+
+  .home-navy-title {
+    font-size: 2.6rem;
+    white-space: normal;
+  }
+}
+
+/* --------------------
+   about
+-------------------- */
+body.about-body {
+  background-color: var(--offwhite2);
+  color: var(--navy);
+  min-height: 100vh;
+}
+
+/* thumb should be navy on about */
+body.about-body .scroll-thumb {
+  background: var(--navy);
+}
+
+/* back link has to be dark on light bg */
+body.about-body .back-link {
+  color: var(--navy);
+  opacity: 0.85;
+}
+
+body.about-body .back-link:hover {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.about-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 6rem 6vw 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.about-title {
+  font-size: 3.2rem;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  white-space: nowrap;
+  color: var(--navy);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  margin-bottom: 4rem;
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+
+  font-size: 1.3rem;
+  line-height: 1.65;
+
+  text-align: justify;
+  text-align-last: left;
+  color: var(--navy);
+}
+
+.about-image {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border: 1px solid rgba(11, 28, 45, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.about-full {
+  max-width: 900px;
+  margin: 0 auto 3.5rem;
+  text-align: center;
+}
+
+.about-subtitle {
+  font-size: 2.6rem;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  margin-bottom: 1.5rem;
+  color: var(--navy);
+}
+
+.about-full p {
+  font-size: 1.3rem;
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+
+  text-align: justify;
+  text-align-last: left;
+  color: var(--navy);
+}
+
+@media (max-width: 677px) {
+  .about-page {
+    padding-top: 7rem;
+  }
+
+  .about-title {
+    white-space: normal;
+    font-size: 2.6rem;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .about-full {
+    text-align: left;
+  }
+}
+
+/* --------------------
+   music
+-------------------- */
+body.music-body {
+  background-color: var(--blue2);
+  color: var(--offwhite);
+  min-height: 100vh;
+}
+
+/* thumb should be offwhite on music */
+body.music-body .scroll-thumb {
+  background: var(--offwhite);
+}
+
+/* --------------------
+   merch
+-------------------- */
+body.merch-body {
+  background-color: var(--offorange);
+}
+
+/* --------------------
+   merch/music "coming soon" layout
+-------------------- */
+.center-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.coming-soon {
+  font-family: var(--font-accent);
+  font-weight: 400;
+  font-size: 5rem;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  color: var(--offwhite);
+}
+
+@media (max-width: 677px) {
+  .coming-soon {
+    font-size: 3.2rem;
+  }
+}
+
+/* --------------------
+   contact
 -------------------- */
 body.contact-body {
   background-color: var(--armygreen);
@@ -442,6 +639,7 @@ body.contact-body {
   text-underline-offset: 6px;
 }
 
+/* contact socials are smaller and offwhite */
 .contact-socials {
   display: flex;
   gap: 1.2rem;
@@ -525,13 +723,14 @@ body.contact-body .contact-socials .icon {
   text-underline-offset: 6px;
 }
 
+/* the thanks msg after submit */
 .contact-thanks {
   display: flex;
   align-items: center;
   justify-content: center;
 
   height: 100%;
-  min-height: 220px; /* ensures vertical centering even on small content */
+  min-height: 220px;
 
   font-family: var(--font-accent);
   font-size: 2.4rem;
@@ -559,193 +758,5 @@ body.contact-body .contact-socials .icon {
 
   .contact-form button {
     align-self: flex-start;
-  }
-}
-
-/* --------------------
-   About Page
--------------------- */
-body.about-body {
-  background-color: var(--offwhite2);
-  color: var(--navy);
-  min-height: 100vh;
-}
-body.about-body .scroll-thumb {
-  background: var(--navy);
-}
-
-.about-page {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 6rem 6vw 3rem;
-  position: relative;
-  z-index: 2;
-}
-
-.about-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.about-title {
-  font-size: 3.2rem;
-  letter-spacing: 0.05em;
-  text-transform: lowercase;
-  white-space: nowrap;
-  color: var(--navy);
-}
-
-.about-grid {
-  display: grid;
-  grid-template-columns: 1.25fr 1fr;
-  gap: 3rem;
-  align-items: start;
-  margin-bottom: 4rem;
-}
-
-.about-text {
-  display: flex;
-  flex-direction: column;
-  gap: 1.35rem;
-  font-size: 1.3rem;
-  line-height: 1.65;
-
-  text-align: justify;
-  text-align-last: left;
-  color: var(--navy);
-}
-
-.about-image {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  border: 1px solid rgba(11, 28, 45, 0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.about-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.about-full {
-  max-width: 900px;
-  margin: 0 auto 3.5rem;
-  text-align: center;
-}
-
-.about-subtitle {
-  font-size: 2.6rem;
-  letter-spacing: 0.12em;
-  text-transform: lowercase;
-  margin-bottom: 1.5rem;
-  color: var(--navy);
-}
-
-.about-full p {
-  font-size: 1.3rem;
-  
-  line-height: 1.65;
-  margin-bottom: 1.25rem;
-  
-
-  text-align: justify;
-  text-align-last: left;
-  color: var(--navy);
-}
-
-body.about-body .back-link {
-  color: var(--navy);
-  opacity: 0.85;
-}
-
-body.about-body .back-link:hover {
-  opacity: 1;
-  text-decoration: underline;
-  text-underline-offset: 6px;
-}
-
-@media (max-width: 677px) {
-  .about-page {
-    padding-top: 7rem;
-  }
-
-  .about-title {
-    white-space: normal;
-    font-size: 2.6rem;
-  }
-
-  .about-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .about-full {
-    text-align: left;
-  }
-}
-
-/* --------------------
-   Music Page
--------------------- */
-
-body.music-body .scroll-thumb {
-  background: var(--offwhite);
-}
-
-body.music-body {
-  background-color: var(--blue2);
-  color: var(--offwhite);
-  min-height: 100vh;
-}
-
-/* --------------------
-   Custom Scrollbar
--------------------- */
-.scroll-indicator {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 10px;
-  height: 100vh;
-  z-index: 9999;
-  pointer-events: none;
-}
-
-.scroll-track {
-  width: 100%;
-  height: 100%;
-  background: rgba(120, 120, 120, 0.35);
-  position: relative;
-  overflow: hidden;
-  pointer-events: auto;
-}
-
-.scroll-thumb {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 10px;
-  background: var(--navy);
-  border-radius: 0;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-@media (max-width: 677px) {
-  .scroll-indicator {
-    width: 3px;
-  }
-
-  .scroll-track {
-    background: rgba(120, 120, 120, 0.25);
-  }
-
-  .scroll-thumb {
-    height: 5px;
   }
 }
