@@ -46,6 +46,17 @@ body {
   background-color: #000;
 }
 
+@keyframes gentle-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .accent-font {
   font-family: var(--font-accent);
   font-weight: 400;
@@ -89,9 +100,12 @@ body::-webkit-scrollbar {
   color: var(--navy);
   text-decoration: none;
   white-space: nowrap;
+  transition: transform 120ms ease, opacity 120ms ease;
 }
 
 .site-nav a:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
   text-decoration: underline;
   text-underline-offset: 6px;
 }
@@ -110,6 +124,7 @@ body::-webkit-scrollbar {
 
   text-align: center;
   white-space: nowrap;
+  animation: gentle-rise-in 420ms ease 200ms both;
 }
 
 /* --------------------
@@ -185,9 +200,11 @@ body::-webkit-scrollbar {
   color: var(--offwhite);
 
   opacity: 0.85;
+  transition: transform 120ms ease, opacity 120ms ease;
 }
 
 .back-link:hover {
+  transform: translateY(-1px);
   opacity: 1;
   text-decoration: underline;
   text-underline-offset: 6px;
@@ -225,6 +242,7 @@ body::-webkit-scrollbar {
   background: var(--navy);
   border-radius: 0;
   transform: translateY(0);
+  will-change: transform;
   pointer-events: auto;
 }
 
@@ -318,6 +336,18 @@ body::-webkit-scrollbar {
   pointer-events: auto;
 }
 
+.overlay-content > * {
+  animation: gentle-rise-in 420ms ease both;
+}
+
+.overlay-content > *:nth-child(2) {
+  animation-delay: 60ms;
+}
+
+.overlay-content > *:nth-child(3) {
+  animation-delay: 110ms;
+}
+
 .hero-cover {
   height: 100vh;
   background-color: rgba(11, 28, 45, 0.9);
@@ -335,6 +365,7 @@ body::-webkit-scrollbar {
   max-width: none;
   margin: 0;
   text-align: center;
+  animation: gentle-rise-in 420ms ease 140ms both;
 }
 
 .home-video {
@@ -427,6 +458,22 @@ body.about-body .back-link:hover {
   z-index: 2;
 }
 
+.about-page > * {
+  animation: gentle-rise-in 380ms ease both;
+}
+
+.about-page > *:nth-child(2) {
+  animation-delay: 50ms;
+}
+
+.about-page > *:nth-child(3) {
+  animation-delay: 90ms;
+}
+
+.about-page > *:nth-child(4) {
+  animation-delay: 130ms;
+}
+
 .about-header {
   text-align: center;
   margin-bottom: 3rem;
@@ -438,6 +485,12 @@ body.about-body .back-link:hover {
   text-transform: lowercase;
   white-space: nowrap;
   color: var(--navy);
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+
+.about-header:hover .about-title {
+  transform: translateY(-1px);
+  opacity: 0.92;
 }
 
 .about-grid {
@@ -468,6 +521,12 @@ body.about-body .back-link:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+
+.about-image:hover {
+  transform: translateY(-1px);
+  opacity: 0.96;
 }
 
 .about-image img {
@@ -489,6 +548,12 @@ body.about-body .back-link:hover {
   text-transform: lowercase;
   margin-bottom: 1.5rem;
   color: var(--navy);
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+
+.about-full:hover .about-subtitle {
+  transform: translateY(-1px);
+  opacity: 0.92;
 }
 
 .about-full p {
@@ -554,6 +619,10 @@ body.merch-body {
   padding: 2rem;
 }
 
+.center-screen > * {
+  animation: gentle-rise-in 380ms ease 40ms both;
+}
+
 .coming-soon {
   font-family: var(--font-accent);
   font-weight: 400;
@@ -561,6 +630,12 @@ body.merch-body {
   letter-spacing: 0.08em;
   text-transform: lowercase;
   color: var(--offwhite);
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+
+.center-screen:hover .coming-soon {
+  transform: translateY(-1px);
+  opacity: 0.92;
 }
 
 @media (max-width: 677px) {
@@ -586,6 +661,14 @@ body.contact-body {
   padding: 6rem 6vw 3rem;
 }
 
+.contact-page > * {
+  animation: gentle-rise-in 380ms ease both;
+}
+
+.contact-page > *:nth-child(2) {
+  animation-delay: 60ms;
+}
+
 .contact-header {
   text-align: center;
   margin-bottom: 2.5rem;
@@ -597,6 +680,12 @@ body.contact-body {
   letter-spacing: 0.05em;
   text-transform: lowercase;
   white-space: nowrap;
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+
+.contact-header:hover .contact-title {
+  transform: translateY(-1px);
+  opacity: 0.92;
 }
 
 .contact-grid {
@@ -624,6 +713,12 @@ body.contact-body {
   font-size: 2rem;
   font-weight: 400;
   letter-spacing: 0.12em;
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+
+.contact-row:hover .contact-label {
+  transform: translateY(-1px);
+  opacity: 0.92;
 }
 
 .contact-value {
@@ -631,9 +726,11 @@ body.contact-body {
   color: var(--offwhite);
   text-decoration: none;
   opacity: 0.9;
+  transition: transform 120ms ease, opacity 120ms ease;
 }
 
 .contact-value:hover {
+  transform: translateY(-1px);
   opacity: 1;
   text-decoration: underline;
   text-underline-offset: 6px;
@@ -671,6 +768,7 @@ body.contact-body .contact-socials .icon {
   color: var(--offwhite);
 
   outline: none;
+  transition: border-color 120ms ease, opacity 120ms ease;
 }
 
 .contact-form input::placeholder,
@@ -715,9 +813,11 @@ body.contact-body .contact-socials .icon {
 
   cursor: pointer;
   opacity: 0.85;
+  transition: transform 120ms ease, opacity 120ms ease;
 }
 
 .contact-form button:hover {
+  transform: translateY(-1px);
   opacity: 1;
   text-decoration: underline;
   text-underline-offset: 6px;
@@ -739,6 +839,51 @@ body.contact-body .contact-socials .icon {
   text-align: center;
 
   color: var(--offwhite);
+  animation: gentle-rise-in 380ms ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto;
+  }
+
+  .about-page > *,
+  .overlay-content > *,
+  .home-navy-content,
+  .site-credit,
+  .center-screen > *,
+  .contact-page > *,
+  .contact-thanks {
+    animation: none;
+  }
+
+  .back-link,
+  .about-title,
+  .about-image,
+  .about-subtitle,
+  .coming-soon,
+  .contact-title,
+  .contact-label,
+  .contact-value,
+  .contact-form input,
+  .contact-form textarea,
+  .contact-form button {
+    transition: none;
+  }
+
+  .back-link:hover,
+  .about-header:hover .about-title,
+  .about-image:hover,
+  .about-full:hover .about-subtitle,
+  .center-screen:hover .coming-soon,
+  .contact-header:hover .contact-title,
+  .contact-row:hover .contact-label,
+  .contact-value:hover,
+  .contact-form input:focus,
+  .contact-form textarea:focus,
+  .contact-form button:hover {
+    transform: none;
+  }
 }
 
 @media (max-width: 677px) {

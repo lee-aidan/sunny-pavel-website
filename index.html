@@ -17,6 +17,9 @@
       type="font/woff2"
       crossorigin
     />
+    <link rel="preconnect" href="https://www.youtube.com" />
+    <link rel="preconnect" href="https://www.youtube-nocookie.com" />
+    <link rel="preconnect" href="https://i.ytimg.com" />
 
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -29,6 +32,10 @@
           src="images/bg.jpg"
           alt=""
           class="fullscreen-image hero-image"
+          width="1545"
+          height="1024"
+          decoding="async"
+          fetchpriority="high"
         />
       </section>
 
@@ -50,7 +57,7 @@
             href="https://www.instagram.com/sunnypavelmusic?igsh=NTc4MTIwNjQ2YQ%3D%3D&utm_source=qr"
             aria-label="Instagram"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
           ></a>
 
           <a
@@ -58,7 +65,7 @@
             href="http://www.tiktok.com/@sunnypavelmusic"
             aria-label="TikTok"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
           ></a>
 
           <a
@@ -66,7 +73,7 @@
             href="https://www.youtube.com/@SunnyPavelMusic"
             aria-label="YouTube"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
           ></a>
 
           <a class="icon icon-spotify" href="#" aria-label="Spotify"></a>
@@ -87,6 +94,8 @@
               <iframe
                 src="https://www.youtube.com/embed/B6aw87yWlFg?rel=0&modestbranding=1"
                 title="Sunny Pavel – Live Performance"
+                width="900"
+                height="506"
                 loading="lazy"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
@@ -110,6 +119,6 @@
       </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
   </body>
 </html>

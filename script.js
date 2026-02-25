@@ -1,60 +1,54 @@
-// grab the custom scrollbar elements
 const track = document.querySelector(".scroll-track");
 const thumb = document.querySelector(".scroll-thumb");
 
-// only run this if the scrollbar exists on the page
 if (track && thumb) {
+  const doc = document.documentElement;
   let isDragging = false;
   let dragOffsetY = 0;
+  let maxScroll = 1;
+  let maxThumbTop = 1;
+  let rafId = 0;
 
-  // keeps a value between a min and max
   function clamp(n, min, max) {
     return Math.max(min, Math.min(max, n));
   }
 
-  // get current scroll position + max scrollable distance
-  function getDocScrollInfo() {
-    const doc = document.documentElement;
-    const scrollTop = doc.scrollTop || document.body.scrollTop;
-    const scrollHeight = doc.scrollHeight;
-    const clientHeight = doc.clientHeight;
-    const maxScroll = Math.max(1, scrollHeight - clientHeight);
-    return { scrollTop, maxScroll };
+  function getScrollTop() {
+    return window.pageYOffset || doc.scrollTop || document.body.scrollTop || 0;
   }
 
-  // fixed thumb height for consistent feel
+  function refreshScrollBounds() {
+    maxScroll = Math.max(1, doc.scrollHeight - doc.clientHeight);
+  }
+
   function setThumbSize() {
+    // Preserve the current visual behavior (fixed thumb size across pages).
     thumb.style.height = "67px";
+    maxThumbTop = Math.max(1, track.clientHeight - thumb.offsetHeight);
   }
 
-  // move the thumb when the page scrolls
-  function syncThumbToScroll() {
-    const { scrollTop, maxScroll } = getDocScrollInfo();
-    const trackH = track.clientHeight;
-    const thumbH = thumb.offsetHeight;
-    const maxThumbTop = Math.max(1, trackH - thumbH);
-
-    const y = (scrollTop / maxScroll) * maxThumbTop;
+  function renderThumb() {
+    rafId = 0;
+    refreshScrollBounds();
+    const y = (getScrollTop() / maxScroll) * maxThumbTop;
     thumb.style.transform = `translateY(${y}px)`;
   }
 
-  // scroll the page when dragging or clicking the track
+  function scheduleThumbSync() {
+    if (rafId) return;
+    rafId = window.requestAnimationFrame(renderThumb);
+  }
+
   function scrollToThumbPosition(clientY) {
     const rect = track.getBoundingClientRect();
     const trackY = clientY - rect.top;
-
-    const trackH = track.clientHeight;
-    const thumbH = thumb.offsetHeight;
-    const maxThumbTop = Math.max(1, trackH - thumbH);
-
     const thumbTop = clamp(trackY - dragOffsetY, 0, maxThumbTop);
-    const { maxScroll } = getDocScrollInfo();
 
+    refreshScrollBounds();
     const scrollTop = (thumbTop / maxThumbTop) * maxScroll;
-    window.scrollTo({ top: scrollTop, behavior: "auto" });
+    window.scrollTo(0, scrollTop);
   }
 
-  // clicking the track jumps the thumb
   track.addEventListener("pointerdown", (e) => {
     if (e.target === thumb) return;
     dragOffsetY = thumb.offsetHeight / 2;
@@ -62,17 +56,13 @@ if (track && thumb) {
     e.preventDefault();
   });
 
-  // start dragging the thumb
   thumb.addEventListener("pointerdown", (e) => {
     isDragging = true;
     thumb.setPointerCapture(e.pointerId);
-
-    const thumbRect = thumb.getBoundingClientRect();
-    dragOffsetY = e.clientY - thumbRect.top;
+    dragOffsetY = e.clientY - thumb.getBoundingClientRect().top;
     e.preventDefault();
   });
 
-  // move thumb while dragging
   window.addEventListener(
     "pointermove",
     (e) => {
@@ -83,21 +73,24 @@ if (track && thumb) {
     { passive: false }
   );
 
-  // stop dragging
-  window.addEventListener("pointerup", () => {
+  function stopDragging() {
     isDragging = false;
-  });
+  }
 
-  // sync thumb when page scrolls normally
-  window.addEventListener("scroll", syncThumbToScroll, { passive: true });
+  window.addEventListener("pointerup", stopDragging);
+  window.addEventListener("pointercancel", stopDragging);
+  thumb.addEventListener("lostpointercapture", stopDragging);
 
-  // keep things in sync on resize
+  window.addEventListener("scroll", scheduleThumbSync, { passive: true });
   window.addEventListener("resize", () => {
     setThumbSize();
-    syncThumbToScroll();
+    scheduleThumbSync();
+  });
+  window.addEventListener("load", () => {
+    setThumbSize();
+    scheduleThumbSync();
   });
 
-  // initial setup
   setThumbSize();
-  syncThumbToScroll();
+  scheduleThumbSync();
 }
