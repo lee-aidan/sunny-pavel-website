@@ -242,8 +242,11 @@ body::-webkit-scrollbar {
   background: var(--navy);
   border-radius: 0;
   transform: translateY(0);
-  will-change: transform;
   pointer-events: auto;
+}
+
+.scroll-thumb.is-dragging {
+  will-change: transform;
 }
 
 /* --------------------
