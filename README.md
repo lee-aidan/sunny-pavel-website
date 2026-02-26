@@ -1,197 +1,385 @@
 # Sunny Pavel Artist Page
 
-This project is a custom-built promotional website for musician Sunny Pavel. The site serves as a central hub for showcasing music, sharing background information, and providing clear contact pathways, all within a visually driven, minimalist design. The site is fully static and intentionally lightweight, with styling and interaction handled through handcrafted HTML, CSS, and JavaScript.
+Sunny Pavel Artist Page is a custom-built promotional website for musician Sunny Pavel. The site serves as a central hub for showcasing music, sharing background information, and providing direct contact pathways within a visually driven, minimalist interface.
 
-This was the second website I've ever developed, and I approached it as an opportunity to go deeper into the stylistic side of front-end development. Rather than focusing on accessibility tooling or backend systems, this project was an exercise in layout control, visual hierarchy, typography, and subtle interaction design.
+The project is a fully static multi-page site with styling and interaction handled through handcrafted HTML, CSS, and JavaScript. The current iteration also includes performance and mobile refinements such as image loading hints, safe-area support for newer iPhones, gentle page-load transitions, and a custom scrollbar optimized for smoothness.
+
+This was the second website I developed, and I used it to go deeper into layout control, visual hierarchy, typography, layered scroll behavior, and lightweight interaction design.
 
 All HTML, CSS, and JavaScript was written manually without frameworks.
 
 ---
 
-## Project Approach
+## Project Highlights
 
-Unlike my first site, which prioritized data flow and admin control, this project was built from the outside in. The primary goal was to explore how far expressive design could be pushed using only core web technologies, while still maintaining a clean and navigable structure.
-
-JavaScript is used sparingly and intentionally, not to manage data, but to enforce visual behaviors, synchronize UI elements, and support custom interactions that CSS alone could not easily achieve.
+- Custom-designed static artist website with multi-page structure
+- Layered homepage with sticky hero image + overlaid navigation
+- Embedded YouTube performance section integrated into the landing flow
+- Custom draggable scrollbar with click-to-jump support
+- Smooth page-load transitions and subtle hover interactions
+- Formspree-powered contact form with client-side formatting + async submission
+- Mobile-safe layout refinements for newer iPhones (viewport-fit=cover, safe-area insets, dvh)
+- Vanilla HTML/CSS/JavaScript (no framework)
 
 ---
 
-## HTML Development
+## HTML Architecture
 
-The site’s HTML is organized as a set of clearly separated pages (index.html, about.html, music.html, contact.html, and merch.html), each following a consistent structural pattern. Markup is intentionally kept minimal and semantic, allowing styling and JavaScript-driven behavior to define most of the user experience rather than heavy DOM structure.
+The site uses a simple multi-page HTML structure with consistent patterns across pages: title/header content, shared navigation behaviors, shared icon classes, and a single shared stylesheet/script. Markup stays intentionally minimal so layout, color, and motion can be controlled mostly through CSS.
 
-On the homepage, the HTML introduces a layered layout built around a full-viewport hero section. The hero uses a fixed, full-screen image as a visual anchor, with the primary navigation and title overlaid on top. This hero remains visually dominant as the user begins to scroll, creating the feeling of a static entry point rather than a traditional top-of-page layout.
+The homepage is structured as a layered scroll experience rather than a standard top-to-bottom content stack:
 
-As the user scrolls, the page transitions into a second full-height section that acts like a transparent “second page.” This section overlays the hero image with a semi-opaque background and hosts a promotional video, allowing the content to feel connected to the landing experience rather than segmented into a new page. Structurally, this behavior is achieved by stacking sections vertically and allowing CSS to control how they interact during scroll.
+- A full-viewport hero image acts as the visual anchor
+- Title, nav links, and social icons sit on top of the hero
+- A second full-height section overlays the hero with a semi-opaque panel and video content
+- A custom scroll indicator sits outside the main flow as a separate UI layer
 
-Navigation and layout remain simple at the markup level, with predictable containers and IDs that allow styling and interaction logic to stay flexible. This consistency made it easier to experiment with layered scrolling, full-screen sections, and visual transitions without rewriting the core HTML structure.
-
-#### from `index.html`:
+### Example: layered homepage structure (`index.html`)
 
 ```html
-<section class="hero" aria-hidden="true">
-  <img src="images/bg.jpg" alt="" class="fullscreen-image hero-image" />
-</section>
+<body class="home-body">
+  <main class="fullscreen home-wrap">
+    <section class="hero" aria-hidden="true">
+      <img
+        src="images/bg.jpg"
+        alt=""
+        class="fullscreen-image hero-image"
+        width="1545"
+        height="1024"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </section>
 
-<div class="overlay-content">
-  <h1 class="site-title accent-font">sunny pavel</h1>
+    <div class="overlay-content">
+      <h1 class="site-title accent-font">sunny pavel</h1>
 
-  <nav class="site-nav">
-    <a href="about.html">about</a>
-    <a href="music.html">music</a>
-    <a href="contact.html">contact</a>
-  </nav>
-</div>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="about.html">about</a>
+        <a href="music.html">music</a>
+        <a href="contact.html">contact</a>
+      </nav>
+    </div>
 
-<section class="hero-cover">
-  <div class="home-navy-content">
-    <h2 class="home-navy-title accent-font">
-      a few songs to showcase my sound!
-    </h2>
-  </div>
-</section>
+    <section class="hero-cover">
+      <div class="home-navy-content">
+        <h2 class="home-navy-title accent-font">
+          a few songs to showcase my sound!
+        </h2>
+
+        <div class="home-video">
+          <div class="home-video-placeholder">
+            <iframe
+              src="https://www.youtube.com/embed/B6aw87yWlFg?rel=0&modestbranding=1"
+              title="Sunny Pavel – Live Performance"
+              width="900"
+              height="506"
+              loading="lazy"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+
+      <p class="site-credit accent-font">built by aidan lee</p>
+    </section>
+  </main>
+</body>
 ```
 
-This structure allowed the homepage to behave more like a continuous visual experience than a traditional scrollable document, while keeping the underlying HTML straightforward and easy to reason about.
+This structure keeps the HTML readable while enabling layered scroll behavior and strong visual staging through CSS.
 
 ---
 
-## CSS Development
+## CSS Approach
 
-Styling is centralized in a single styles.css file and organized by page context using body-level classes (for example: .about-body, .music-body, and .contact-body). This structure allows each page to maintain a distinct visual identity while still sharing global typography rules, spacing conventions, and reusable components.
+Styling is centralized in a single `styles.css` file and organized by page context using body classes. This allows each page to maintain a distinct visual identity while still sharing typography, icon behavior, spacing conventions, and reusable components.
 
-A significant portion of the design exploration focused on layered layouts and scroll-based visual behavior. On the homepage, CSS is used to control how the hero image, overlaid navigation, and the semi-opaque “second page” interact as the user scrolls. Rather than introducing new routes or hard transitions, opacity, positioning, and stacking order are used to create the feeling of moving through multiple visual states within a single page.
+### CSS design goals
 
-A custom scroll indicator replaces the native browser scrollbar, reinforcing the site’s minimal aesthetic and visually tying scroll progress into the overall design language, with its interaction logic handled separately in JavaScript.
+- Minimal markup with expressive styling
+- Layered scroll behavior on the homepage
+- Strong typography + custom accent font
+- Reusable icon and navigation patterns
+- Subtle motion without heavy animation scripting
+- Page-specific color palettes with shared visual rules
+- Responsive behavior that preserves layout intent on phones
 
-Visual experimentation throughout the site emphasized:
+### Current iteration additions (CSS)
 
-	•	Full-viewport sections and fixed-position elements
-	•	Layered content using opacity and z-index
-	•	Strong typographic contrast through custom fonts and letter spacing
-	•	Page-specific color palettes that shift mood between sections
-	•	Smooth hover states and subtle transitions
+- Gentle load-in transitions (`@keyframes`)
+- Hover micro-interactions on navigation and page headings
+- `prefers-reduced-motion` fallback
+- Mobile safe-area support (`env(safe-area-inset-*)`)
+- `100dvh` support for more reliable mobile viewport sizing
+- Condensed mobile video width so the embed is not edge-to-edge
 
-Custom fonts are self-hosted and imported directly into the stylesheet, allowing tighter control over loading behavior and typography consistency across pages. Colors are defined as CSS variables, making it easy to iterate on palettes while keeping contrast and visual balance consistent.
-
-Rather than relying on a CSS framework, all layout decisions were handled manually. This reinforced an understanding of modern CSS concepts such as positioning, stacking contexts, scroll behavior, and responsive scaling, while keeping the design flexible enough to support ongoing visual iteration.
-
-#### from `styles.css` (layered scroll styling):
+### Example: homepage layered layout + mobile safe-area handling (`styles.css`)
 
 ```css
 .hero {
   position: sticky;
   top: 0;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
+  z-index: 1;
+}
+
+.overlay-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  padding-top: calc(0.01rem + env(safe-area-inset-top));
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+
+  height: 100vh;
+  height: 100dvh;
+  justify-content: flex-start;
 }
 
 .hero-cover {
   height: 100vh;
+  height: 100dvh;
   background-color: rgba(11, 28, 45, 0.9);
   position: relative;
   z-index: 3;
 }
+
+@media (max-width: 677px) {
+  .overlay-content {
+    padding-top: calc(1.4rem + env(safe-area-inset-top));
+    padding-left: max(0.75rem, env(safe-area-inset-left));
+    padding-right: max(0.75rem, env(safe-area-inset-right));
+  }
+
+  .home-video {
+    width: min(92vw, 100%);
+  }
+}
 ```
 
-This approach allowed visual transitions to emerge naturally from layout and scroll behavior, rather than being driven by explicit animation scripts.
+This approach lets layout, stacking, and visual transitions do most of the work rather than relying on a framework or animation library.
 
 ---
 
-## Javascript Development
+## Motion & Interaction Design
 
-JavaScript is used to reinforce the site’s visual language rather than drive application state. The most prominent example is the custom scrollbar, which replaces the browser’s native scrollbar with a stylized, draggable indicator that spans the full height of the viewport.
+The site uses subtle motion to reinforce the visual design without changing layout or introducing heavy effects. Motion is implemented in CSS and kept intentionally small:
 
-The scrollbar logic tracks document scroll position, maps it to a visual thumb position, and supports both dragging and click-to-jump behavior. This served as an experiment in translating page state into a custom visual control, rather than relying on default browser UI. The logic adapts dynamically to different page lengths, ensuring consistent behavior across pages with varying amounts of content.
+- Page-load fade/rise transitions for major sections
+- Hover lift/opacity changes for navigation links, icons, headings, and selected UI elements
+- Reduced-motion support to disable transitions/animations when requested by the user
 
-JavaScript is also used to keep UI elements synchronized with scroll position and to conditionally enable interactions only when the relevant DOM elements are present. All interaction logic lives in a single script.js file and runs defensively so pages without certain components are unaffected.
+### Example: gentle load-in + hover behavior (`styles.css`)
 
-### from `script.js` (scroll syncing):
+```css
+@keyframes gentle-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-```js
-window.addEventListener("scroll", () => {
-  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-  const y = (window.scrollY / maxScroll) * maxThumbTop;
-  thumb.style.transform = `translateY(${y}px)`;
-});
+.site-nav a {
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+
+.site-nav a:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.overlay-content > * {
+  animation: gentle-rise-in 420ms ease both;
+}
 ```
-This approach allowed me to explore advanced visual behavior while keeping the overall codebase simple and maintainable.
+
+These interactions support polish and hierarchy without making the site feel animation-heavy.
 
 --- 
 
-## Contact Form Workflow
+## JavaScript Development
 
-The contact page uses a controlled submission flow that sends structured messages directly to email while keeping the experience simple and predictable for the user. All input handling and validation happens on the client side, which allows the form to respond immediately without requiring a page reload or exposing any underlying implementation details.
+JavaScript is used sparingly and intentionally. The main shared script (`script.js`) powers the custom scrollbar, which visually replaces the browser scrollbar and supports both drag and click-to-jump interaction.
 
-Phone number handling was designed to account for the many ways users enter or autofill contact information. Input is normalized in real time by removing non-numeric characters, accounting for optional country codes, and reformatting the value into a consistent and readable structure before submission. This ensures the data that reaches email remains clean and usable regardless of how it was entered.
+The current iteration of the scrollbar logic focuses on smoothness and low overhead:
 
-#### from `contact.html`:
+- `requestAnimationFrame-based` thumb syncing
+- Passive scroll listener
+- Cached track bounds during dragging
+- Drag-only pointermove listeners (attached only while dragging)
+- Disabled/hid when page content is not scrollable
+- Visibility-aware updates (skips work when tab is hidden)
+- Touch-device behavior is limited, but the home page can still display the custom scrollbar on mobile
 
-```js
-phoneInput.addEventListener("input", (e) => {
-  let digits = e.target.value.replace(/\D/g, "");
-
-  if (digits.length === 11 && digits.startsWith("1")) {
-    digits = digits.slice(1);
-  }
-
-  digits = digits.slice(0, 10);
-
-  let formatted = "";
-  if (digits.length > 0) formatted = "(" + digits.slice(0, 3);
-  if (digits.length >= 4) formatted += ") " + digits.slice(3, 6);
-  if (digits.length >= 7) formatted += "-" + digits.slice(6, 10);
-
-  e.target.value = formatted;
-});
-```
-
-After a successful submission, the form is replaced in place with a confirmation message rather than navigating away from the page. This allowed me to explore how JavaScript can manage user feedback and interface state changes in a lightweight way while keeping the interaction uninterrupted.
-
-#### from `contact.html`:
+### Example: current scrollbar setup (`script.js`)
 
 ```js
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+const track = document.querySelector(".scroll-track");
+const thumb = document.querySelector(".scroll-thumb");
 
-  sendBtn.disabled = true;
-  sendBtn.style.opacity = "0.6";
+if (track && thumb) {
+  const isFinePointer = window.matchMedia("(pointer: fine)").matches;
+  const allowTouchScrollbar =
+    document.body && document.body.classList.contains("home-body");
 
-  const formData = new FormData(form);
+  if (!isFinePointer && !allowTouchScrollbar) {
+    const indicator = document.querySelector(".scroll-indicator");
+    if (indicator) indicator.style.display = "none";
+  } else {
+    const doc = document.documentElement;
+    let rafId = 0;
+    let maxScroll = 1;
+    let maxThumbTop = 1;
 
-  try {
-    const res = await fetch(form.action, {
-      method: "POST",
-      body: formData,
-      headers: { Accept: "application/json" },
-    });
+    function renderThumb() {
+      rafId = 0;
+      if (document.visibilityState !== "visible") return;
+      maxScroll = Math.max(1, doc.scrollHeight - doc.clientHeight);
+      const y = ((window.pageYOffset || doc.scrollTop || 0) / maxScroll) * maxThumbTop;
+      thumb.style.transform = `translateY(${y}px)`;
+    }
 
-    if (!res.ok) throw new Error("Submission failed");
+    function scheduleThumbSync() {
+      if (rafId) return;
+      rafId = window.requestAnimationFrame(renderThumb);
+    }
 
-    rightColumn.innerHTML = `
-      <p class="contact-thanks accent-font">
-        thanks, i'll do my best to respond promptly!
-      </p>
-    `;
-  } catch (err) {
-    sendBtn.disabled = false;
-    sendBtn.style.opacity = "0.85";
-    alert("Something went wrong. Please try again.");
+    window.addEventListener("scroll", scheduleThumbSync, { passive: true });
   }
-});
+}
 ```
 
-This approach ensures consistent formatting at the point of entry and prevents malformed data from being submitted, while keeping the logic simple and easy to maintain.
+This script keeps visual behavior synchronized with page state while remaining defensive and reusable across all pages.
+
+--- 
+
+### Contact Form Workflow
+
+The contact page uses a lightweight client-side workflow for sending inquiries through Formspree. JavaScript handles formatting and submission behavior without reloading the page.
+
+### Contact form goals
+
+- Keep the form simple and readable
+- Normalize phone numbers as users type
+- Generate a useful email subject automatically
+- Submit asynchronously
+- Replace the form in place with a confirmation message on success
+
+### Example: phone formatting (`contact.html`)
+
+```html
+<script>
+  phoneInput.addEventListener("input", (e) => {
+    let digits = e.target.value.replace(/\D/g, "");
+
+    if (digits.length === 11 && digits.startsWith("1")) {
+      digits = digits.slice(1);
+    }
+
+    digits = digits.slice(0, 10);
+
+    let formatted = "";
+
+    if (digits.length > 0) formatted = "(" + digits.slice(0, 3);
+    if (digits.length >= 4) formatted += ") " + digits.slice(3, 6);
+    if (digits.length >= 7) formatted += "-" + digits.slice(6);
+
+    e.target.value = formatted;
+  });
+</script>
+```
+### Example: async submission + inline success state (`contact.html`)
+
+```html
+<script>
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    sendBtn.disabled = true;
+    sendBtn.style.opacity = "0.6";
+
+    try {
+      const res = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+
+      if (!res.ok) throw new Error("submit failed");
+
+      rightCol.innerHTML = `
+        <p class="contact-thanks accent-font">
+          thanks, i'll do my best to respond promptly!
+        </p>
+      `;
+    } catch (err) {
+      sendBtn.disabled = false;
+      sendBtn.style.opacity = "0.85";
+      alert("Something went wrong. Please try again.");
+    }
+  });
+</script>
+```
+
+This keeps the workflow fast and understandable while still giving the user immediate feedback.
+
+---
+
+## Performance & Mobile Optimization (Current Iteration)
+
+The current repo iteration includes several optimizations to improve loading behavior, scrolling smoothness, and mobile presentation without changing the site’s visual style.
+
+### Performance improvements
+
+- Image dimension attributes added to reduce layout shift
+- `decoding="async"` and `fetchpriority="high"` for the homepage hero image
+- `loading="lazy"` on the YouTube iframe
+- `defer` on shared script loading
+- `preload` for the self-hosted accent font
+- `preconnect` for YouTube and Formspree
+- Custom scrollbar JS updated for smoother scroll sync and lower overhead
+- Lossless JPEG optimization on large image assets
+
+### Mobile / iPhone refinements
+
+- `viewport-fit=cover` added to support full-screen layouts on iPhones
+- Safe-area inset padding used for top/right/bottom spacing
+- `100dvh` added alongside `100vh` for mobile browser UI changes
+- Mobile YouTube embed width slightly condensed (`92vw`) rather than edge-to-edge
+- Custom scrollbar remains visible on the home page on touch devices
+
+### Example: mobile-safe viewport meta (`index.html`)
+
+```html
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+/>
+```
+
+These changes preserve the original visual design while improving perceived polish and device compatibility.
 
 ---
 
 ## tl;dr
 
-This site is a custom-built artist website developed as a second major web project, with an emphasis on visual design and interaction rather than accessibility constraints. Built using vanilla HTML, CSS, and JavaScript, it explores layered layouts, scroll-based visual behavior, and custom UI elements such as a stylized scrollbar. JavaScript is used to support these visual experiments while also handling practical workflows like controlled form submission and user feedback. The project served as an opportunity to deepen my understanding of front-end structure, styling systems, and interaction-driven design.
-
-
-
-
+Sunny Pavel Artist Page is a custom-built static promotional website developed as a second major web project, with an emphasis on visual design, layered layout behavior, typography, and lightweight interaction design. Built with vanilla HTML, CSS, and JavaScript, the site uses a sticky hero homepage, a custom scrollbar, and a Formspree-powered contact flow, while the current iteration adds smoothness, subtle motion, and mobile-safe refinements for modern iPhones.
 
 
 
