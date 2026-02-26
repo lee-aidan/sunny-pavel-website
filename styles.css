@@ -57,6 +57,17 @@ body {
   }
 }
 
+@keyframes gentle-rise-in-centered {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
 .accent-font {
   font-family: var(--font-accent);
   font-weight: 400;
@@ -113,7 +124,7 @@ body::-webkit-scrollbar {
 /* credit at bottom of home */
 .site-credit {
   position: absolute;
-  bottom: 1.5rem;
+  bottom: max(1.5rem, calc(env(safe-area-inset-bottom) + 0.75rem));
   left: 50%;
   transform: translateX(-50%);
 
@@ -124,7 +135,7 @@ body::-webkit-scrollbar {
 
   text-align: center;
   white-space: nowrap;
-  animation: gentle-rise-in 420ms ease 200ms both;
+  animation: gentle-rise-in-centered 420ms ease 200ms both;
 }
 
 /* --------------------
@@ -217,9 +228,10 @@ body::-webkit-scrollbar {
 .scroll-indicator {
   position: fixed;
   top: 0;
-  right: 0;
+  right: env(safe-area-inset-right);
   width: 10px;
   height: 100vh;
+  height: 100dvh;
   z-index: 9999;
   pointer-events: none;
 }
@@ -305,6 +317,7 @@ body::-webkit-scrollbar {
   position: sticky;
   top: 0;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   z-index: 1;
 }
@@ -327,7 +340,9 @@ body::-webkit-scrollbar {
   left: 0;
   z-index: 2;
   width: 100%;
-  padding-top: 0.01rem;
+  padding-top: calc(0.01rem + env(safe-area-inset-top));
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 
   display: flex;
   flex-direction: column;
@@ -335,6 +350,7 @@ body::-webkit-scrollbar {
   gap: 0.2rem;
 
   height: 100vh;
+  height: 100dvh;
   justify-content: flex-start;
   pointer-events: auto;
 }
@@ -353,6 +369,7 @@ body::-webkit-scrollbar {
 
 .hero-cover {
   height: 100vh;
+  height: 100dvh;
   background-color: rgba(11, 28, 45, 0.9);
   position: relative;
   z-index: 3;
@@ -369,6 +386,8 @@ body::-webkit-scrollbar {
   margin: 0;
   text-align: center;
   animation: gentle-rise-in 420ms ease 140ms both;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
 .home-video {
@@ -414,16 +433,28 @@ body::-webkit-scrollbar {
 
 @media (max-width: 677px) {
   .overlay-content {
-    padding-top: 2rem;
+    padding-top: calc(1.4rem + env(safe-area-inset-top));
+    padding-left: max(0.75rem, env(safe-area-inset-left));
+    padding-right: max(0.75rem, env(safe-area-inset-right));
   }
 
   .hero-image {
     object-position: 7% 30%;
   }
 
+  .hero-cover {
+    padding-left: max(0.6rem, env(safe-area-inset-left));
+    padding-right: max(0.6rem, env(safe-area-inset-right));
+    padding-bottom: max(0.6rem, env(safe-area-inset-bottom));
+  }
+
   .home-navy-title {
     font-size: 2.6rem;
     white-space: normal;
+  }
+
+  .home-video {
+    width: min(92vw, 100%);
   }
 }
 

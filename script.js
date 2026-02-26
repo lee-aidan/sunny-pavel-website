@@ -3,7 +3,10 @@ const thumb = document.querySelector(".scroll-thumb");
 
 if (track && thumb) {
   const isFinePointer = window.matchMedia("(pointer: fine)").matches;
-  if (!isFinePointer) {
+  const allowTouchScrollbar =
+    document.body && document.body.classList.contains("home-body");
+
+  if (!isFinePointer && !allowTouchScrollbar) {
     const indicator = document.querySelector(".scroll-indicator");
     if (indicator) indicator.style.display = "none";
   } else {
