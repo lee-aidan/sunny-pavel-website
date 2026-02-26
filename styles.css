@@ -432,6 +432,15 @@ body::-webkit-scrollbar {
 }
 
 @media (max-width: 677px) {
+  /* Use a stable viewport height on phones so Safari chrome show/hide
+     doesn't make the sticky hero visually "zoom" while scrolling. */
+  .hero,
+  .overlay-content,
+  .hero-cover,
+  .scroll-indicator {
+    height: 100svh;
+  }
+
   .overlay-content {
     padding-top: calc(1.4rem + env(safe-area-inset-top));
     padding-left: max(0.75rem, env(safe-area-inset-left));
