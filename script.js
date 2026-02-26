@@ -1,5 +1,29 @@
 const track = document.querySelector(".scroll-track");
 const thumb = document.querySelector(".scroll-thumb");
+const root = document.documentElement;
+
+if (document.body && document.body.classList.contains("home-body")) {
+  const mobileHomeQuery = window.matchMedia("(max-width: 677px)");
+
+  function lockHomeViewportHeight() {
+    if (!mobileHomeQuery.matches) {
+      root.style.removeProperty("--home-mobile-vh");
+      return;
+    }
+
+    const vh = Math.round(
+      (window.visualViewport && window.visualViewport.height) || window.innerHeight
+    );
+
+    root.style.setProperty("--home-mobile-vh", `${vh}px`);
+  }
+
+  lockHomeViewportHeight();
+  window.addEventListener("load", lockHomeViewportHeight, { passive: true });
+  window.addEventListener("orientationchange", () => {
+    window.setTimeout(lockHomeViewportHeight, 80);
+  });
+}
 
 if (track && thumb) {
   const isFinePointer = window.matchMedia("(pointer: fine)").matches;

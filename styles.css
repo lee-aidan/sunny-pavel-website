@@ -438,7 +438,7 @@ body::-webkit-scrollbar {
   .overlay-content,
   .hero-cover,
   .scroll-indicator {
-    height: 100svh;
+    height: var(--home-mobile-vh, 100svh);
   }
 
   .overlay-content {
